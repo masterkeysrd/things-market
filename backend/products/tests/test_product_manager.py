@@ -1,6 +1,9 @@
-from products.manager import ProductManager, ProductQuerySet
 from django.test import TestCase
 from unittest.mock import Mock, call, patch
+
+from products.tests import mocker
+from products.models import Product
+from products.manager import ProductManager, ProductQuerySet
 
 class TestProductManager(TestCase):
 
@@ -41,3 +44,26 @@ class TestProductManager(TestCase):
         self.assertEquals(1, mock_products.call_count)
         self.assertEquals(call(), mock_products.call_args)
 
+        
+    @patch('products.manager.ProductQuerySet.get_by_id')
+    def test_get_product_by_id(self, mock_get_by_id: Mock):
+        product_manager = ProductManager()
+
+        mock_get_by_id.return_value = mocker.get_mock_product_with_id()
+        product = product_manager.get_by_id(mocker.WELL_KNOWN_PRODUCT_ID)
+        
+        self.assertTrue(mock_get_by_id.called)
+        self.assertEquals(1, mock_get_by_id.call_count)
+        self.assertEquals(call(mocker.WELL_KNOWN_PRODUCT_ID), mock_get_by_id.call_args)
+        self.assertEquals(mocker.WELL_KNOWN_PRODUCT_ID, product.id)
+        self.assertEquals(mocker.WELL_KNOWN_PRODUCT_NAME, product.name)
+        self.assertEquals(mocker.WELL_KNOWN_PRODUCT_DESCRIPTION, product.description)
+        self.assertEquals(mocker.WELL_KNOWN_PRODUCT_TYPE, product.type)
+
+    
+    @patch('products.manager.ProductQuerySet.get_by_id')
+    def test_get_product_by_bad_id(self, mock_get_by_id: Mock):
+        mock_get_by_id.side_effect = Product.DoesNotExist()
+
+        product_manager = ProductManager()
+        self.assertRaises(Product.DoesNotExist, product_manager.get_by_id, mocker.NOT_KNOWN_PRODUCT_ID)

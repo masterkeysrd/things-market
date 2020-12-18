@@ -22,6 +22,9 @@ class ProductManager(Manager):
     def get_queryset(self) -> ProductQuerySet:
         return ProductQuerySet(self.model, using=self._db)
     
+    def get_by_id(self, id):
+        return self.get_queryset().get_by_id(id)
+
     def get_by_name(self, name):
         return self.get_queryset().get_by_name(name)
 
