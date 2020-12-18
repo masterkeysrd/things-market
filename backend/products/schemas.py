@@ -16,7 +16,7 @@ class ProductType(DjangoObjectType):
 
     def resolve_attributes_list(self, info):
         if self.attributes:
-            return [{'name': attribute.name, 'value': attribute.value} for attribute in self.attributes]
+            return [AttributeType(name=attribute.get('name'), value=attribute.get('value')) for attribute in self.attributes]
         
         return list()
 

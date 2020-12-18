@@ -47,7 +47,7 @@ def get_mock_product_list(quantity=10, add_id=False, add_attributes=False):
             product.id=bson.ObjectId()
 
         if add_attributes:
-            product.attributes= {'name': f'attribute_test {i}', 'value': f'attribute_value {i}'}
+            product.attributes= [{'name': f'attribute_test {i}', 'value': f'attribute_value {i}'}]
             
         product_list.append(product)
         
