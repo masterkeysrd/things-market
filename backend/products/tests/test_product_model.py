@@ -19,7 +19,7 @@ class TestProductModel(TestCase):
         self.assertEquals(mocker.WELL_KNOWN_PRODUCT_TYPE, filled_product.type)
         
     def test_create_product_with_attributes(self):
-        product = mocker.get_mock_product_with_attributes()
+        product = mocker.get_mock_product(add_attributes=True)
         product.save()
 
         filled_product = Product.objects.get_by_id(product.id)

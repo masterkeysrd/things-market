@@ -9,7 +9,7 @@ class TestProductQuery(TestCase):
 
     @patch('products.models.Product.objects.get_by_id')
     def test_resolve_product_whit_correct_id(self, mock_get_by_id: Mock):
-        expected = mocker.get_mock_product_with_id()
+        expected = mocker.get_mock_product(add_id=True)
         mock_get_by_id.return_value = expected
 
         query = Query()

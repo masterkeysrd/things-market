@@ -49,7 +49,7 @@ class TestProductManager(TestCase):
     def test_get_product_by_id(self, mock_get_by_id: Mock):
         product_manager = ProductManager()
 
-        mock_get_by_id.return_value = mocker.get_mock_product_with_id()
+        mock_get_by_id.return_value = mocker.get_mock_product(add_id=True)
         product = product_manager.get_by_id(mocker.WELL_KNOWN_PRODUCT_ID)
         
         self.assertTrue(mock_get_by_id.called)
