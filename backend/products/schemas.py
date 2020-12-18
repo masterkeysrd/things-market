@@ -1,11 +1,24 @@
 import graphene
 from graphene_django.types import DjangoObjectType, ObjectType
-from products.models import Product
+from products.models import Attribute, Product
 
+
+class AttributeType(DjangoObjectType):
+    class Meta:
+        model = Attribute
 
 class ProductType(DjangoObjectType):
+    attributes_list = graphene.List(AttributeType)
     class Meta:
         model = Product
+        exclude = ('attributes', )
+
+
+    def resolve_attributes_list(self, info):
+        if self.attributes:
+            return [{'name': attribute.name, 'value': attribute.value} for attribute in self.attributes]
+        
+        return list()
 
 
 class Query(ObjectType):
@@ -23,3 +36,5 @@ class Query(ObjectType):
 
     def resolve_products(self, info, **kwargs):
         return Product.objects.products()
+
+schema = graphene.Schema(query=Query)
