@@ -1,0 +1,21 @@
+schema {
+  query: Query
+}
+
+type AttributeType {
+  name: String!
+  value: String!
+}
+
+type ProductType {
+  id: String!
+  name: String!
+  description: String!
+  type: String!
+  attributesList: [AttributeType]
+}
+
+type Query {
+  product(id: String): ProductType
+  products: [ProductType]
+}
