@@ -8,6 +8,9 @@ class ProductQuerySet(QuerySet):
     def products(self):
         return self.all()
 
+    def get_by_id(self, id):
+        return self.get(id=id)
+
     def get_by_name(self, name):
         return self.products().filter(name=name)
 

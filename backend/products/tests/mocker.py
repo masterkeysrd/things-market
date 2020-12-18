@@ -1,9 +1,12 @@
 from typing import List
 from products.models import Product
 
-WELL_KNOWN_PRODUCT_NAME = "Mobile Phone"
-WELL_KNOWN_PRODUCT_DESCRIPTION = "Great phone for all of the uses."
+WELL_KNOWN_PRODUCT_ID = "5fdbfe80b747cd99d130d14f"
+WELL_KNOWN_PRODUCT_NAME = "Xiaomi Redmi Note 8"
+WELL_KNOWN_PRODUCT_DESCRIPTION = "New Phone with some scratch in the screen."
 WELL_KNOWN_PRODUCT_TYPE = "Phone"
+
+NOT_KNOWN_PRODUCT_ID = "xxxxx80b747cd99d130d1"
 
 def get_mock_product():
     return Product(
@@ -11,6 +14,11 @@ def get_mock_product():
         description=WELL_KNOWN_PRODUCT_DESCRIPTION,
         type=WELL_KNOWN_PRODUCT_TYPE
     )
+
+def get_mock_product_with_id():
+    product = get_mock_product()
+    product.id = WELL_KNOWN_PRODUCT_ID
+    return product
 
 def get_mock_product_with_attributes():
     product = get_mock_product()
