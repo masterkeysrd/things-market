@@ -1,4 +1,5 @@
 from djongo import models
+from .manager import ProductManager
 
 class Attribute(models.Model):
     name = models.CharField(max_length=60)
@@ -18,6 +19,8 @@ class Product(models.Model):
     attributes = models.ArrayField(
         model_container=Attribute
     )
+
+    objects = ProductManager
 
     def __str__(self) -> str:
         return f'name={self.name}, description={self.description}'
