@@ -20,7 +20,7 @@ class Product(models.Model):
         model_container=Attribute
     )
 
-    objects = ProductManager
+    objects = ProductManager()
 
     def __str__(self) -> str:
         return f'name={self.name}, description={self.description}'

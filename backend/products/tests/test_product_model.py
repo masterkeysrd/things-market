@@ -1,5 +1,4 @@
 from django.test import TestCase
-from djongo.models.fields import ObjectIdField
 
 from . import mocker
 from products.models import Product
@@ -10,7 +9,7 @@ class TestProductModel(TestCase):
         product = mocker.get_mock_product()
         product.save()
         
-        filled_product = Product.objects.get(id=product.id)
+        filled_product = Product.objects.get_by_id(product.id)
 
         self.assertIsNotNone(product.pk, 'After create a Product it should have an ID')
         self.assertIsNotNone(filled_product)
@@ -23,7 +22,7 @@ class TestProductModel(TestCase):
         product = mocker.get_mock_product_with_attributes()
         product.save()
 
-        filled_product = Product.objects.get(id=product.id)
+        filled_product = Product.objects.get_by_id(product.id)
 
         self.assertIsNotNone(product.pk, 'After create a Product it should have an ID')
         self.assertEqual(2, len(filled_product.attributes), 'The length of attribute should be equals as inserted')
@@ -45,7 +44,7 @@ class TestProductModel(TestCase):
         product = Product()
         product.save()
         
-        filled_product = Product.objects.get(id=product.id)
+        filled_product = Product.objects.get_by_id(product.id)
         print(filled_product.name)
 
         self.assertIsNotNone(product.id)
@@ -59,18 +58,18 @@ class TestProductModel(TestCase):
         product = mocker.get_mock_product()
         product.save()
 
-        self.assertRaises(Product.DoesNotExist, Product.objects.get, name="Not existing product")
+        self.assertRaises(Product.DoesNotExist, Product.objects.get_by_id, mocker.NOT_KNOWN_PRODUCT_ID)
 
     def test_update_product(self):
         product = mocker.get_mock_product()
         product.save()
 
-        filled_product = Product.objects.get(id=product.id)
+        filled_product = Product.objects.get_by_id(product.id)
         filled_product.name = "Changed Name"
         filled_product.description = "Changed Description"
         filled_product.save()
 
-        updated_product = Product.objects.get(id=product.id)
+        updated_product = Product.objects.get_by_id(product.id)
 
         self.assertIsNotNone(product)
         self.assertIsNotNone(filled_product)
