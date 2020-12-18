@@ -1,3 +1,4 @@
+from unittest import mock
 from . import mocker
 from django.test import TestCase
 from unittest.mock import MagicMock, Mock, call, patch
@@ -9,23 +10,22 @@ class TestProductQuerySet(TestCase):
     
     @patch('products.manager.super')
     def test_query_all(self, mock_query_set: MagicMock):
-
-        query_set = ProductQuerySet(Product, using=[mocker.get_mock_records(100)])
+        query_set = ProductQuerySet(Product)
         query_set.all()
 
         self.assertTrue(mock_query_set.called)
         mock_query_set.assert_called_once_with()
 
-    def test_query_products(self):
+    @patch('products.manager.ProductQuerySet.all')
+    def test_query_products(self, mock_all: Mock):
         mock_instance = ProductQuerySet(Product)
-        mock_instance.all = Mock()
-        mock_instance.all.return_value = mock_instance
+        mock_all.return_value = mock_instance
 
         ProductQuerySet.products(mock_instance)
 
-        self.assertTrue(mock_instance.all.called)
-        self.assertEquals(1, mock_instance.all.call_count)
-        mock_instance.all.assert_called_once()
+        self.assertTrue(mock_all.called)
+        self.assertEquals(1, mock_all.call_count)
+        mock_all.assert_called_once()
         
     @patch('products.manager.ProductQuerySet.filter')
     @patch('products.manager.ProductQuerySet.products')
