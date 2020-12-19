@@ -40,5 +40,5 @@ def convert_object_id_field_to_string(field, registry=None):
     return String(description=field.help_text, required=not field.null)
 
 @convert_django_field.register(models.ArrayField)
-def convert_array_field_to_list(field, registry=None):
-    return List(of_type=Attribute, description=field.help_text, required=not field.null)
+def convert_array_field_to_list(field: models.ArrayField, registry=None):
+    return List(of_type=field.model_container, description=field.help_text, required=not field.null)
