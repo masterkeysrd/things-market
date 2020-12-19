@@ -8,11 +8,11 @@ type AttributeType {
 }
 
 type ProductType {
-  id: String!
   name: String!
   description: String!
   type: String!
-  attributesList: [AttributeType]
+  attributes: [AttributeType]
+  id: String
 }
 
 type Query {
