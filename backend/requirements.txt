@@ -1,3 +1,4 @@
 Django
 djongo
 graphene-django
+coverage
