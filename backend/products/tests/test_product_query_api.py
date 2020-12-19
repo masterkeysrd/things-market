@@ -1,4 +1,6 @@
 import json
+
+from bson.objectid import ObjectId
 from products.models import Product
 from products.tests import mocker
 from unittest.mock import Mock, patch
@@ -15,8 +17,8 @@ class TestProductQueryApi(GraphQLTestCase):
             self.assertTrue(field in product)
 
         if check_attributes:
-            self.assertTrue('attributesList' in product)
-            for attribute in product.get('attributesList'):
+            self.assertTrue('attributes' in product)
+            for attribute in product.get('attributes'):
                 for field in ['name', 'value']:
                     self.assertTrue(field in attribute)
 
@@ -43,7 +45,7 @@ class TestProductQueryApi(GraphQLTestCase):
     @patch('products.models.Product.objects.products')
     def test_product_query_with_attributes_list_empty(self, mock_products: Mock):
         mock_products.return_value = mocker.get_mock_product_list(add_id=True)
-        response = self.query( 'query { products { id, name, type, attributesList { name, value } } }')
+        response = self.query( 'query { products { id, name, type, attributes { name, value } } }')
 
         content: dict = json.loads(response.content)
         data = content.get('data')
@@ -57,7 +59,7 @@ class TestProductQueryApi(GraphQLTestCase):
     @patch('products.models.Product.objects.products')
     def test_product_query_with_attributes_list_filled(self, mock_products: Mock):
         mock_products.return_value = mocker.get_mock_product_list(add_id=True, add_attributes=True)
-        response = self.query( 'query { products { id, name, type, attributesList { name, value } } }')
+        response = self.query( 'query { products { id, name, type, attributes { name, value } } }')
 
         content: dict = json.loads(response.content)
         data = content.get('data')
@@ -87,7 +89,7 @@ class TestProductQueryApi(GraphQLTestCase):
 
         self.assertResponseNoErrors(response)
         self.assertIsInstance(product, dict)
-        self.assertEquals(mocker.WELL_KNOWN_PRODUCT_ID, product.get('id'))
+        self.assertEquals(mocker.WELL_KNOWN_PRODUCT_ID, ObjectId(product.get('id')))
         self.assertEquals(mocker.WELL_KNOWN_PRODUCT_NAME, product.get('name'))
         self.assertEquals(mocker.WELL_KNOWN_PRODUCT_DESCRIPTION, product.get('description'))
         self.assertEquals(mocker.WELL_KNOWN_PRODUCT_TYPE, product.get('type'))

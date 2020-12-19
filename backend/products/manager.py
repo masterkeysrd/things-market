@@ -1,3 +1,4 @@
+from bson.objectid import ObjectId
 from djongo.models import Manager, QuerySet
 
 class ProductQuerySet(QuerySet):
@@ -9,7 +10,8 @@ class ProductQuerySet(QuerySet):
         return self.all()
 
     def get_by_id(self, id):
-        return self.get(id=id)
+        id = ObjectId(id)
+        return self.get(_id=id)
 
     def get_by_name(self, name):
         return self.products().filter(name=name)

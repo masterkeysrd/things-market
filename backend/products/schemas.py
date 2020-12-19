@@ -8,13 +8,14 @@ class AttributeType(DjangoObjectType):
         model = Attribute
 
 class ProductType(DjangoObjectType):
-    attributes_list = graphene.List(AttributeType)
+    id = graphene.String()
+    attributes = graphene.List(AttributeType)
     class Meta:
         model = Product
-        exclude = ('attributes', )
+        exclude = ('_id', )
 
 
-    def resolve_attributes_list(self, info):
+    def resolve_attributes(self, info):
         if self.attributes:
             return [AttributeType(name=attribute.get('name'), value=attribute.get('value')) for attribute in self.attributes]
         

@@ -2,12 +2,12 @@ import bson
 from typing import List
 from products.models import Product
 
-WELL_KNOWN_PRODUCT_ID = "5fdbfe80b747cd99d130d14f"
+WELL_KNOWN_PRODUCT_ID = bson.ObjectId("5fdbfe80b747cd99d130d14f")
 WELL_KNOWN_PRODUCT_NAME = "Xiaomi Redmi Note 8"
 WELL_KNOWN_PRODUCT_DESCRIPTION = "New Phone with some scratch in the screen."
 WELL_KNOWN_PRODUCT_TYPE = "Phone"
 
-NOT_KNOWN_PRODUCT_ID = "xxxxx80b747cd99d130d1"
+NOT_KNOWN_PRODUCT_ID = bson.ObjectId()
 
 def get_mock_product(add_id=False, add_attributes=False):
     product = Product(

@@ -13,14 +13,22 @@ class Attribute(models.Model):
     def __str__(self) -> str:
         return self.name
 
-class Product(models.Model):
-    id = models.ObjectIdField(primary_key=True)
+class Product(models.Model, object):
+    _id = models.ObjectIdField()
     name = models.CharField(max_length=60)
     description = models.TextField()
     type = models.CharField(max_length=60)
     attributes = models.ArrayField(
         model_container=Attribute
     )
+
+    @property
+    def id(self):
+        return self._id
+
+    @id.setter
+    def id(self, value):
+        self._id = value
 
     objects = ProductManager()
 
