@@ -1,12 +1,12 @@
-export interface Product {
-  id: string;
-  name: string;
-  type: string;
-  description: string;
-  attributes: ProductAttribute[];
+export interface IProduct {
+  id?: string;
+  name?: string;
+  type?: string;
+  description?: string;
+  attributes?: IProductAttribute[];
 }
 
-export interface ProductAttribute {
-  name: string;
-  value: string;
+export interface IProductAttribute {
+  name?: string;
+  value?: string;
 }
