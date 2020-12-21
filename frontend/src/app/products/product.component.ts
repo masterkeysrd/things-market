@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../models/product.model';
 import { ProductsService } from '../service/products.service';
+import { ToastService } from '../service/toast.service';
 
 @Component({
   selector: 'app-products',
@@ -12,7 +13,10 @@ export class ProductComponent implements OnInit {
   title = 'Products';
   products: Observable<IProduct[]>;
 
-  constructor(private productsService: ProductsService) { }
+  constructor(
+    private toast: ToastService,
+    private productsService: ProductsService
+  ) { }
 
   ngOnInit(): void {
     this.loadData();
@@ -36,10 +40,11 @@ export class ProductComponent implements OnInit {
   }
 
   onDelete(product: IProduct): void {
-    alert(`Product ${product.name} deleted successfully`);
+    this.toast.showSuccess(`Product ${product.name} deleted successfully`);
   }
 
   onDeleteError(error): void {
-    console.log(error);
+    this.toast.showDanger('Error deleting product.');
+    console.error(error);
   }
 }

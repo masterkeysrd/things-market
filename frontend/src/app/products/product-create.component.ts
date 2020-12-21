@@ -5,6 +5,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ProductsService } from '../service/products.service';
 import { IProduct, IProductAttribute } from '../models/product.model';
+import { ToastService } from '../service/toast.service';
 
 @Component({
   selector: 'app-create',
@@ -22,7 +23,12 @@ export class ProductCreateComponent implements OnInit {
   });
   currentAttributeForm = this.createAttributeForm();
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private productService: ProductsService) { }
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private toast: ToastService,
+    private productService: ProductsService
+  ) { }
 
   ngOnInit(): void {
     this.loadData();
@@ -89,7 +95,7 @@ export class ProductCreateComponent implements OnInit {
 
   saveProduct(): void {
     if (this.productForm.invalid) {
-      alert('Please check the form validations messages.')
+      this.toast.showDanger('Please check the form validations messages.');
       return;
     }
 
@@ -97,7 +103,7 @@ export class ProductCreateComponent implements OnInit {
     const product = this.createFromForm();
 
     if (product.id) {
-      this.subscribeToSaveResponse(this.productService.updateProduct(product))
+      this.subscribeToSaveResponse(this.productService.updateProduct(product));
     } else {
       this.subscribeToSaveResponse(this.productService.createProduct(product));
     }
@@ -132,12 +138,13 @@ export class ProductCreateComponent implements OnInit {
 
   protected onSave(product: IProduct): void {
     this.isSaving = false;
-    alert(`Product ${product.name} saved successfully`);
+    this.toast.showSuccess(`Product ${product.name} saved successfully`);
     this.previousState();
   }
 
   protected onSaveError(errors): void {
     this.isSaving = false;
-    console.log(errors)
+    this.toast.showDanger('Error saving product.')
+    console.error(errors);
   }
 }
