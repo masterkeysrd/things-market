@@ -1,10 +1,40 @@
 schema {
   query: Query
+  mutation: Mutation
+}
+
+input AttributeInput {
+  name: String!
+  value: String!
 }
 
 type AttributeType {
   name: String!
   value: String!
+}
+
+type CreateProduct {
+  ok: Boolean
+  product: ProductType
+}
+
+type DeleteProduct {
+  ok: Boolean
+  product: ProductType
+}
+
+type Mutation {
+  createProduct(input: ProductInput!): CreateProduct
+  updateProduct(input: ProductInput!): UpdateProduct
+  deleteProduct(id: String!): DeleteProduct
+}
+
+input ProductInput {
+  id: String
+  name: String!
+  type: String!
+  description: String!
+  attributes: [AttributeInput]
 }
 
 type ProductType {
@@ -17,5 +47,10 @@ type ProductType {
 
 type Query {
   product(id: String): ProductType
-  products: [ProductType]
+  products(searchText: String): [ProductType]
+}
+
+type UpdateProduct {
+  ok: Boolean
+  product: ProductType
 }
