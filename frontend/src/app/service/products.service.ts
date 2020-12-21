@@ -1,11 +1,10 @@
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import { Injectable } from '@angular/core';
-import { Observable, pipe } from 'rxjs';
-import { map } from 'rxjs/operators';
 
-
-import { GET_PRODUCT, GET_PRODUCTS_LIST } from './product.queries';
 import { IProduct } from '../models/product.model';
+import { CREATE_PRODUCT, DELETE_PRODUCT, GET_PRODUCT, GET_PRODUCTS_LIST, UPDATE_PRODUCT } from './product.queries';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +31,43 @@ export class ProductsService {
       .pipe(
         map(response => response.data),
         map(response => response.products)
+      );
+  }
+
+  createProduct(product: IProduct): Observable<IProduct> {
+    console.log(product);
+    return this.apollo.mutate({
+      mutation: CREATE_PRODUCT,
+      variables: product
+    })
+      .pipe(
+        map(response => response.data),
+        map((response: any) => response.createProduct),
+        map((response: any) => response.product)
+      );
+  }
+
+  updateProduct(product: IProduct): Observable<IProduct> {
+    return this.apollo.mutate({
+      mutation: UPDATE_PRODUCT,
+      variables: product
+    })
+      .pipe(
+        map(response => response.data),
+        map((response: any) => response.updateProduct),
+        map((response: any) => response.product)
+      );
+  }
+
+  deleteProduct(id: string): Observable<IProduct> {
+    return this.apollo.mutate({
+      mutation: DELETE_PRODUCT,
+      variables: {id}
+    })
+      .pipe(
+        map(response => response.data),
+        map((response: any) => response.deleteProduct),
+        map((response: any) => response.product)
       );
   }
 }

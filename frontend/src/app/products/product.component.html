@@ -1,11 +1,13 @@
 <h1>{{ title }}</h1>
 
+<a [routerLink]="['/products', 'create']">Create Product</a>
 <table>
   <thead>
     <tr>
       <th>Name</th>
       <th>Type</th>
       <th>Description</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -17,6 +19,12 @@
       </td>
       <td>{{ product.type }}</td>
       <td>{{ product.description }}</td>
+      <td>
+        <a [routerLink]="['/products', product.id, 'view']">
+          View
+        </a>
+        <a [routerLink]="['/products', product.id, 'edit']">Edit</a>
+      </td>
     </tr>
   </tbody>
 </table>

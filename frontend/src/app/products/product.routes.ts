@@ -41,6 +41,16 @@ export const PRODUCTS: Routes = [
   },
   {
     path: 'create',
-    component: ProductCreateComponent
+    component: ProductCreateComponent,
+    resolve: {
+      product: ProductResolve
+    }
+  },
+  {
+    path: ':id/edit',
+    component: ProductCreateComponent,
+    resolve: {
+      product: ProductResolve
+    }
   },
 ];

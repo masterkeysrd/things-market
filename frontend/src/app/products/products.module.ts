@@ -7,6 +7,7 @@ import { PRODUCTS } from './product.routes';
 import { ProductComponent } from './product.component';
 import { ProductCreateComponent } from './product-create.component';
 import { ProductDetailComponent } from './product-detail.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -14,6 +15,7 @@ import { ProductDetailComponent } from './product-detail.component';
   declarations: [ProductComponent, ProductCreateComponent, ProductDetailComponent],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     RouterModule.forChild(PRODUCTS)
   ]
 })

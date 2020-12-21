@@ -1,1 +1,42 @@
-<p>create works!</p>
+<p>Product</p>
+<form [formGroup]="productForm" (submit)="saveProduct()">
+  <div>
+    <input type="hidden" id="id" name="idField" formControlName="id">
+  </div>
+  <div>
+    <label for="name">Name</label>
+    <input id="name" name="nameField" formControlName="name" placeholder="Product Name">
+    <div *ngIf="productForm.get('name').touched && productForm.get('name').invalid">
+      {{ productForm.get('name').errors | json }}
+      <span *ngIf="productForm.get('name').errors.required">Required</span>
+      <span *ngIf="productForm.get('name').errors.minlength">Minimum length 3</span>
+      <span *ngIf="productForm.get('name').errors.maxlength">Maximum length 60</span>
+    </div>
+  </div>
+
+  <div>
+    <label for="type">Type</label>
+    <input id="type" name="typeField" formControlName="type" placeholder="Product Type">
+    <div *ngIf="productForm.get('type').touched && productForm.get('type').invalid">
+      <span *ngIf="productForm.get('type').errors.required">Required</span>
+      <span *ngIf="productForm.get('type').errors.minlength">Minimum length 3</span>
+      <span *ngIf="productForm.get('type').errors.maxlength">Maximum length 60</span>
+    </div>
+  </div>
+
+  <div>
+    <label for="description">Description</label>
+    <textarea id="description" name="descriptionField" formControlName="description" placeholder="Product Description">
+    </textarea>
+    <div *ngIf="productForm.get('description').touched && productForm.get('description').invalid">
+      <span *ngIf="productForm.get('description').errors.required">Required</span>
+      <span *ngIf="productForm.get('description').errors.minlength">Minimum length 3</span>
+      <span *ngIf="productForm.get('description').errors.maxlength">Maximum length 250</span>
+    </div>
+  </div>
+
+  <button type="button" (click)="previousState()">Cancel</button>
+  <button type="submit" [disabled]="!productForm.valid || isSaving">
+    Save
+  </button>
+</form>
