@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
+import { PRODUCTS } from './product.routes';
+
 import { ProductComponent } from './product.component';
 import { ProductCreateComponent } from './product-create.component';
-import { RouterModule } from '@angular/router';
-import { PRODUCTS } from './product.routes';
+import { ProductDetailComponent } from './product-view/product-detail.component';
 
 
 
 @NgModule({
-  declarations: [ProductComponent, ProductCreateComponent],
+  declarations: [ProductComponent, ProductCreateComponent, ProductDetailComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(PRODUCTS)
