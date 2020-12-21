@@ -1,7 +1,8 @@
 import graphene
 from graphene_django.types import DjangoObjectType, ObjectType
-from products.models import Attribute, Product
 
+from products.models import Attribute, Product
+from products.validators import validate_product
 
 class AttributeType(DjangoObjectType):
     class Meta:
@@ -38,4 +39,86 @@ class Query(ObjectType):
     def resolve_products(self, info, **kwargs):
         return Product.objects.products()
 
-schema = graphene.Schema(query=Query)
+
+class AttributeInput(graphene.InputObjectType):
+    name = graphene.String(required=True)
+    value = graphene.String(required=True)
+
+
+class ProductInput(graphene.InputObjectType):
+    id = graphene.String()
+    name = graphene.String(required=True)
+    type = graphene.String(required=True)
+    description = graphene.String(required=True)
+    attributes = graphene.List(AttributeInput)
+
+
+class CreateProduct(graphene.Mutation):
+    class Arguments:
+        input = ProductInput(required=True)
+
+    ok = graphene.Boolean()
+    product = graphene.Field(ProductType)
+
+    @staticmethod
+    def mutate(root, info, input=None):
+        validate_product(input)
+        product_instance = Product.objects.create(
+            name=input.name,
+            type=input.type,
+            description=input.description,
+            attributes=input.attributes
+        )
+
+        return CreateProduct(ok=True, product=product_instance)
+
+
+class UpdateProduct(graphene.Mutation):
+    class Arguments:
+        input = ProductInput(required=True)
+
+    ok = graphene.Boolean()
+    product = graphene.Field(ProductType)
+
+    @staticmethod
+    def mutate(root, info, input=None):
+        product = Product.objects.get_by_id(input.id)
+
+        if input.name:
+            product.name = input.name
+
+        if input.type:
+            product.type = input.type
+
+        if input.description:
+            product.description = input.description
+
+        if input.attributes:
+            product.attributes = input.attributes
+
+        validate_product(product)
+        product.save()
+
+        return UpdateProduct(ok=True, product=product)
+
+class DeleteProduct(graphene.Mutation):
+    class Arguments:
+        id = graphene.String(required=True)
+
+    ok = graphene.Boolean()
+    product = graphene.Field(ProductType)
+
+    @staticmethod
+    def mutate(root, info, id=None):
+        product = Product.objects.get_by_id(input.id)
+        product.delete()
+        return DeleteProduct(ok=True, product=product)
+
+
+class Mutation(ObjectType):
+    create_product = CreateProduct.Field()
+    update_product = UpdateProduct.Field()
+    delete_product = DeleteProduct.Field()
+
+
+schema = graphene.Schema(query=Query, mutation=Mutation)

@@ -9,7 +9,7 @@ WELL_KNOWN_PRODUCT_TYPE = "Phone"
 
 NOT_KNOWN_PRODUCT_ID = bson.ObjectId()
 
-def get_mock_product(add_id=False, add_attributes=False):
+def get_mock_product(add_id=False, add_attributes=False) -> Product:
     product = Product(
         name=WELL_KNOWN_PRODUCT_NAME,
         description=WELL_KNOWN_PRODUCT_DESCRIPTION,
@@ -20,7 +20,7 @@ def get_mock_product(add_id=False, add_attributes=False):
         product.id = WELL_KNOWN_PRODUCT_ID
 
     if add_attributes:
-        product.attributes = product.attributes = [
+        product.attributes = [
         {
                'name': 'Display',
                'value': '7.1 inches',
