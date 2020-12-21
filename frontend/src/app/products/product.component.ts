@@ -28,4 +28,18 @@ export class ProductComponent implements OnInit {
         .getProductList();
   }
 
+  deleteProduct(product: IProduct) {
+    if (confirm(`Are you sure you want to delete `)) {
+      this.productsService.deleteProduct(product.id)
+      .subscribe(product => this.onDelete(product));
+    }
+  }
+
+  onDelete(product: IProduct): void {
+    alert(`Product ${product.name} deleted successfully`);
+  }
+
+  onDeleteError(error): void {
+    console.log(error);
+  }
 }

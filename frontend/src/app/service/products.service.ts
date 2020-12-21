@@ -38,7 +38,10 @@ export class ProductsService {
     console.log(product);
     return this.apollo.mutate({
       mutation: CREATE_PRODUCT,
-      variables: product
+      variables: product,
+      refetchQueries: [
+        { query: GET_PRODUCTS_LIST }
+      ]
     })
       .pipe(
         map(response => response.data),
@@ -50,7 +53,11 @@ export class ProductsService {
   updateProduct(product: IProduct): Observable<IProduct> {
     return this.apollo.mutate({
       mutation: UPDATE_PRODUCT,
-      variables: product
+      variables: product,
+      refetchQueries: [
+        { query: GET_PRODUCTS_LIST },
+        { query: GET_PRODUCT, variables: { id: product.id }}
+      ]
     })
       .pipe(
         map(response => response.data),
@@ -62,7 +69,10 @@ export class ProductsService {
   deleteProduct(id: string): Observable<IProduct> {
     return this.apollo.mutate({
       mutation: DELETE_PRODUCT,
-      variables: {id}
+      variables: { id },
+      refetchQueries: [
+        { query: GET_PRODUCTS_LIST }
+      ]
     })
       .pipe(
         map(response => response.data),
