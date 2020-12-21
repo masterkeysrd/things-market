@@ -43,7 +43,7 @@ class TestProductQuerySet(TestCase):
 
         self.assertTrue(mock_products.called)
         self.assertEquals(1, mock_products.call_count)
-        mock_products.assert_called_once_with(name=name_query)
+        mock_products.assert_called_once_with(name__icontains=name_query)
 
     @patch('products.manager.ProductQuerySet.filter')
     @patch('products.manager.ProductQuerySet.products')
@@ -61,7 +61,7 @@ class TestProductQuerySet(TestCase):
 
         self.assertTrue(mock_products.called)
         self.assertEquals(1, mock_products.call_count)
-        mock_products.assert_called_once_with(description=description_query)
+        mock_products.assert_called_once_with(description__icontains=description_query)
 
     @patch('products.manager.ProductQuerySet.get')
     def test_query_get_by_id(self, mock_get: Mock):
