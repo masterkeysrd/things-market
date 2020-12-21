@@ -5,7 +5,9 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ProductsService } from '../service/products.service';
 import { IProduct, IProductAttribute } from '../models/product.model';
+
 import { ToastService } from '../service/toast.service';
+import { ConfirmDialogService } from '../service/confirm-dialog.service';
 
 @Component({
   selector: 'app-create',
@@ -25,8 +27,9 @@ export class ProductCreateComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private route: ActivatedRoute,
     private toast: ToastService,
+    private route: ActivatedRoute,
+    private confirmDialog: ConfirmDialogService,
     private productService: ProductsService
   ) { }
 
@@ -54,12 +57,16 @@ export class ProductCreateComponent implements OnInit {
 
   deleteAttributeForm(index: number): void {
     if ((this.attributes.at(index).touched ||
-      this.attributes.at(index).valid) &&
-      !confirm('Are you sure you want to delete this Spec?')) {
-        return;
+      this.attributes.at(index).valid)) {
+        this.confirmDialog.confirm('Confirm Delete', 'Are you sure you want to delete this Spec?')
+        .then((confirmed) => {
+          if (confirmed) {
+            this.attributes.removeAt(index);
+          }
+        });
+    } else {
+      this.attributes.removeAt(index);
     }
-
-    this.attributes.removeAt(index);
   }
 
   createAttributeForm() {

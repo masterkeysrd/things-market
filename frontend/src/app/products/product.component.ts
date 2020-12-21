@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../models/product.model';
 import { ProductsService } from '../service/products.service';
 import { ToastService } from '../service/toast.service';
+import { ConfirmDialogService } from '../service/confirm-dialog.service';
 
 @Component({
   selector: 'app-products',
@@ -15,6 +16,7 @@ export class ProductComponent implements OnInit {
 
   constructor(
     private toast: ToastService,
+    private confirmDialog: ConfirmDialogService,
     private productsService: ProductsService
   ) { }
 
@@ -33,10 +35,13 @@ export class ProductComponent implements OnInit {
   }
 
   deleteProduct(product: IProduct) {
-    if (confirm(`Are you sure you want to delete ${product.name}?`)) {
-      this.productsService.deleteProduct(product.id)
-      .subscribe(product => this.onDelete(product));
-    }
+    this.confirmDialog.confirm('Confirm Delete', `Are you sure you want to delete ${product.name}?`)
+      .then((confirmed) => {
+        if (confirmed) {
+          this.productsService.deleteProduct(product.id)
+            .subscribe(product => this.onDelete(product));
+        }
+      })
   }
 
   onDelete(product: IProduct): void {
