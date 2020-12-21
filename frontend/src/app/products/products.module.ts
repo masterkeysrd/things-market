@@ -6,7 +6,7 @@ import { PRODUCTS } from './product.routes';
 
 import { ProductComponent } from './product.component';
 import { ProductCreateComponent } from './product-create.component';
-import { ProductDetailComponent } from './product-view/product-detail.component';
+import { ProductDetailComponent } from './product-detail.component';
 
 
 

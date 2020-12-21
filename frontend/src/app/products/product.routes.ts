@@ -5,7 +5,7 @@ import { take } from "rxjs/operators";
 import { IProduct } from "../models/product.model";
 import { ProductsService } from "../service/products.service";
 import { ProductCreateComponent } from "./product-create.component";
-import { ProductDetailComponent } from "./product-view/product-detail.component";
+import { ProductDetailComponent } from "./product-detail.component";
 import { ProductComponent } from "./product.component";
 
 
