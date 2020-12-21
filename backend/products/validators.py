@@ -3,8 +3,8 @@ from products.models import Attribute, Product
 
 def validate_attributes(attributes: List[Attribute]):
     for attribute in attributes:
-      validate_field('attribute.name', attribute.name, required=True, min_len=3, max_len=60)
-      validate_field('attribute.value', attribute.value, required=True, min_len=3, max_len=60)
+      validate_field('attribute.name', attribute.get('name'), required=True, min_length=3, max_length=60)
+      validate_field('attribute.value', attribute.get('value'), required=True, min_length=3, max_length=60)
 
 def validate_field(name, value, required=False, min_length=None, max_length=None):
 
