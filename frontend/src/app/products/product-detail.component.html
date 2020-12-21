@@ -22,16 +22,17 @@
   </dl>
 
   <h3>Specs</h3>
-  <dl *ngIf="product.attributes">
-    <ng-container *ngFor="let attribute of product.attributes">
-      <dt>
-        <span>{{ attribute.name }}</span>
-      </dt>
-      <dd>
-        <span>{{ attribute.value }}</span>
-      </dd>
-    </ng-container>
-  </dl>
+  <div *ngIf="product.attributes">
+    <div *ngFor="let attribute of product.attributes">
+      <strong class="mr-2">
+        <span>{{ attribute.name }}:</span>
+      </strong>
+      <span>{{ attribute.value }}</span>
+    </div>
+  </div>
 
-  <button type="submit" (click)="previousState()"> Back </button>
+  <div class="mt-5">
+    <button class="btn btn-info" type="submit" (click)="previousState()"> Back </button>
+    <a class="ml-2 btn btn-warning text-white" [routerLink]="['/products', product.id, 'edit']">Edit</a>
+  </div>
 </div>
