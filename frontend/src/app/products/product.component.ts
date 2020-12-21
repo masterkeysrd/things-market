@@ -29,7 +29,7 @@ export class ProductComponent implements OnInit {
   }
 
   deleteProduct(product: IProduct) {
-    if (confirm(`Are you sure you want to delete `)) {
+    if (confirm(`Are you sure you want to delete ${product.name}?`)) {
       this.productsService.deleteProduct(product.id)
       .subscribe(product => this.onDelete(product));
     }

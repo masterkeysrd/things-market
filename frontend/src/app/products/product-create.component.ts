@@ -1,9 +1,10 @@
 import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IProduct, IProductAttribute } from '../models/product.model';
+
 import { ProductsService } from '../service/products.service';
-import { ActivatedRoute } from '@angular/router';
+import { IProduct, IProductAttribute } from '../models/product.model';
 
 @Component({
   selector: 'app-create',
@@ -19,6 +20,7 @@ export class ProductCreateComponent implements OnInit {
     description: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(250)]],
     attributes: this.fb.array([])
   });
+  currentAttributeForm = this.createAttributeForm();
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private productService: ProductsService) { }
 
@@ -30,10 +32,35 @@ export class ProductCreateComponent implements OnInit {
     this.loadProduct();
   }
 
+  get attributes(): FormArray {
+    return this.productForm.get('attributes') as FormArray;
+  }
+
   loadProduct(): void {
     this.route.data.subscribe(({ product }) => {
       this.updateForm(product);
     });
+  }
+
+  addAttributeForm(): void {
+    this.attributes.push(this.createAttributeForm());
+  }
+
+  deleteAttributeForm(index: number): void {
+    if ((this.attributes.at(index).touched ||
+      this.attributes.at(index).valid) &&
+      !confirm('Are you sure you want to delete this Spec?')) {
+        return;
+    }
+
+    this.attributes.removeAt(index);
+  }
+
+  createAttributeForm() {
+    return this.fb.group({
+      name: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
+      value: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(60)]]
+    })
   }
 
   updateForm(product: IProduct): void {
@@ -42,9 +69,22 @@ export class ProductCreateComponent implements OnInit {
       name: product.name,
       type: product.type,
       description: product.description,
-      // TODO: update attributes form
-      //attributes: product.attributes
     });
+
+    if (product.attributes) {
+      product.attributes.forEach(attribute => {
+        const form = this.createAttributeForm();
+        form.patchValue({
+          name: attribute.name,
+          value: attribute.value
+        });
+        this.attributes.push(form)
+      });
+    }
+
+    if (!product.id) {
+      this.addAttributeForm();
+    }
   }
 
   saveProduct(): void {
