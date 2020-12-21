@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../models/product.model';
+import { IProduct } from '../models/product.model';
 import { ProductsService } from '../service/products.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { ProductsService } from '../service/products.service';
 export class ProductComponent implements OnInit {
 
   title = 'Products';
-  products: Observable<Product[]>;
+  products: Observable<IProduct[]>;
 
   constructor(private productsService: ProductsService) { }
 
