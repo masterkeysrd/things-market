@@ -25,7 +25,7 @@ class ProductType(DjangoObjectType):
 
 class Query(ObjectType):
     product = graphene.Field(ProductType, id=graphene.String())
-    products = graphene.List(ProductType)
+    products = graphene.List(ProductType, search_text=graphene.String(required=False))
 
 
     def resolve_product(self, info, **kwargs):
@@ -37,6 +37,11 @@ class Query(ObjectType):
         return None
 
     def resolve_products(self, info, **kwargs):
+        search_text = kwargs.get('search_text')
+
+        if search_text:
+            return Product.objects.search(search_text)
+
         return Product.objects.products()
 
 
@@ -110,7 +115,7 @@ class DeleteProduct(graphene.Mutation):
 
     @staticmethod
     def mutate(root, info, id=None):
-        product = Product.objects.get_by_id(input.id)
+        product = Product.objects.get_by_id(id)
         product.delete()
         return DeleteProduct(ok=True, product=product)
 
