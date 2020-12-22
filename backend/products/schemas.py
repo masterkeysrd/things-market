@@ -95,6 +95,7 @@ class CreateProduct(graphene.Mutation):
         product_instance = Product.objects.create(
             name=input.name,
             type=input.type,
+            price=input.price,
             description=input.description,
             attributes=input.attributes
         )
@@ -124,6 +125,9 @@ class UpdateProduct(graphene.Mutation):
 
         if input.attributes:
             product.attributes = input.attributes
+
+        if input.price is not None:
+            product.price = input.price
 
         validate_product(product)
         product.save()
