@@ -77,6 +77,7 @@ class ProductInput(graphene.InputObjectType):
     id = graphene.String()
     name = graphene.String(required=True)
     type = graphene.String(required=True)
+    price= graphene.Float(required=True)
     description = graphene.String(required=True)
     attributes = graphene.List(AttributeInput)
 
