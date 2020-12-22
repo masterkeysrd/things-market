@@ -4,7 +4,7 @@ import { ProductsService } from 'src/app/service/products.service';
 import products from '../../mock/products.mock.json';
 import { ProductComponent } from '../../app/products/product.component';
 import { ProductServiceMock } from '../mock/product.service.mock';
-import { NgbPagination, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastService } from 'src/app/service/toast.service';
 import { ConfirmDialogService } from 'src/app/service/confirm-dialog.service';
 
@@ -70,7 +70,8 @@ describe('ProductsComponent', () => {
     const headers: HTMLElement[] = fixture.nativeElement.querySelectorAll('thead tr th');
     expect(headers[0].textContent).toContain('Name');
     expect(headers[1].textContent).toContain('Type');
-    expect(headers[2].textContent).toContain('Description');
+    expect(headers[2].textContent).toContain('Price');
+    expect(headers[3].textContent).toContain('Description');
   });
 
   it('should render table data', () => {
@@ -84,7 +85,8 @@ describe('ProductsComponent', () => {
         const row = rows[i];
         expect(row.cells[0].textContent).toContain(product.name);
         expect(row.cells[1].textContent).toContain(product.type);
-        expect(row.cells[2].textContent).toContain(product.description);
+        expect(row.cells[2].textContent).toContain(product.price.toString());
+        expect(row.cells[3].textContent).toContain(product.description);
       });
     });
   });
