@@ -6,6 +6,7 @@ export const GET_PRODUCT = gql`
       id
       name
       type
+      price
       description
       attributes {
         name
@@ -27,6 +28,7 @@ query GetProductsList($page: Int, $pageSize: Int, $searchText: String) {
       id
       name
       type
+      price
       description
     }
   }
@@ -35,10 +37,11 @@ query GetProductsList($page: Int, $pageSize: Int, $searchText: String) {
 
 
 export const CREATE_PRODUCT = gql`
-  mutation createProductMutation($name: String!, $type: String!, $description: String!, , $attributes: [AttributeInput]) {
+  mutation createProductMutation($name: String!, $type: String!, $description: String!, $price: Float!, $attributes: [AttributeInput]) {
     createProduct(input: {
         name: $name
         type: $type
+        price: $price
         description: $description
         attributes: $attributes
     })
@@ -55,11 +58,12 @@ export const CREATE_PRODUCT = gql`
 
 
 export const UPDATE_PRODUCT = gql`
-  mutation updateProductMutation($id: String!, $name: String!, $type: String!, $description: String!, $attributes: [AttributeInput]) {
+  mutation updateProductMutation($id: String!, $name: String!, $type: String!, $price: Float!, $description: String!, $attributes: [AttributeInput]) {
     updateProduct(input: {
         id: $id
         name: $name
         type: $type
+        price: $price
         description: $description
         attributes: $attributes
     })

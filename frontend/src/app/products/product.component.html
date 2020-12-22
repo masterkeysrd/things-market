@@ -19,6 +19,7 @@
     <tr>
       <th>Name</th>
       <th>Type</th>
+      <th>Price</th>
       <th>Description</th>
       <th class="text-center" style="width: 200px;">Actions</th>
     </tr>
@@ -31,6 +32,7 @@
         </a>
       </td>
       <td>{{ product.type }}</td>
+      <td>{{ product.price }}</td>
       <td>{{ product.description }}</td>
       <td class="text-center">
         <a class="btn btn-sm btn-info" [routerLink]="['/products', product.id, 'view']">View</a>

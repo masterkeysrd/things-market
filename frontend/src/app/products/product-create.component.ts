@@ -20,6 +20,7 @@ export class ProductCreateComponent implements OnInit {
     id: [],
     name: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
     type: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
+    price: [null, [Validators.required, Validators.min(0)]],
     description: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(250)]],
     attributes: this.fb.array([])
   });
@@ -81,6 +82,7 @@ export class ProductCreateComponent implements OnInit {
       id: product?.id,
       name: product?.name,
       type: product?.type,
+      price: product?.price,
       description: product?.description,
     });
 
@@ -125,6 +127,7 @@ export class ProductCreateComponent implements OnInit {
       id: this.productForm.get('id').value,
       name: this.productForm.get('name').value,
       type: this.productForm.get('type').value,
+      price: this.productForm.get('price').value,
       description: this.productForm.get('description').value,
       attributes: this.createAttributesFromForm()
     }

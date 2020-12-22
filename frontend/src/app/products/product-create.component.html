@@ -24,6 +24,15 @@
   </div>
 
   <div>
+    <label for="price">Type</label>
+    <input class="form-control" id="price" name="priceField" formControlName="price" placeholder="00.00"/>
+    <div class="text-danger" *ngIf="productForm.get('price').touched && productForm.get('price').invalid">
+      <span *ngIf="productForm.get('price').errors.required">Required</span>
+      <span *ngIf="productForm.get('price').errors.min">The minimum price is 0</span>
+    </div>
+  </div>
+
+  <div>
     <label for="description">Description</label>
     <textarea class="form-control" id="description" name="descriptionField" formControlName="description" placeholder="Product Description">
     </textarea>
