@@ -14,7 +14,8 @@ class TestProductQuery(TestCase):
         product_instance = Product(
             name=mocker.WELL_KNOWN_PRODUCT_NAME,
             description=mocker.WELL_KNOWN_PRODUCT_DESCRIPTION,
-            type=mocker.WELL_KNOWN_PRODUCT_TYPE
+            type=mocker.WELL_KNOWN_PRODUCT_TYPE,
+            price=mocker.WELL_KNOWN_PRODUCT_PRICE,
         )
 
         expected = mocker.get_mock_product(add_id=True)

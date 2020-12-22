@@ -5,10 +5,11 @@ from graphene_django.utils.testing import GraphQLTestCase
 
 
 ADD_PRODUCT_MUTATION = '''
-    mutation createProductMutation($name: String!, $type: String!, $description: String!) {
+    mutation createProductMutation($name: String!, $type: String!, $price: Float!, $description: String!) {
         createProduct(input: {
              name: $name
              type: $type 
+             price: $price
              description: $description
         })
         {
@@ -17,6 +18,7 @@ ADD_PRODUCT_MUTATION = '''
                 id
                 name
                 type
+                price
                 description
             }
         }
@@ -31,7 +33,8 @@ class TestProductMutationApi(GraphQLTestCase):
         variables = {
             'name': mocker.WELL_KNOWN_PRODUCT_NAME,
             'type': mocker.WELL_KNOWN_PRODUCT_TYPE,
-            'description': mocker.WELL_KNOWN_PRODUCT_DESCRIPTION
+            'description': mocker.WELL_KNOWN_PRODUCT_DESCRIPTION,
+            'price': mocker.WELL_KNOWN_PRODUCT_PRICE
         }
 
         response = self.query(
@@ -54,6 +57,7 @@ class TestProductMutationApi(GraphQLTestCase):
         self.assertEquals(str(mocker.WELL_KNOWN_PRODUCT_ID), product.get('id'))
         self.assertEquals(mocker.WELL_KNOWN_PRODUCT_NAME, product.get('name'))
         self.assertEquals(mocker.WELL_KNOWN_PRODUCT_TYPE, product.get('type'))
+        self.assertEquals(mocker.WELL_KNOWN_PRODUCT_PRICE, product.get('price'))
         self.assertEquals(mocker.WELL_KNOWN_PRODUCT_DESCRIPTION, product.get('description'))
 
 

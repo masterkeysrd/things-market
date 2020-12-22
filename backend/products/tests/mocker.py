@@ -6,6 +6,7 @@ WELL_KNOWN_PRODUCT_ID = bson.ObjectId("5fdbfe80b747cd99d130d14f")
 WELL_KNOWN_PRODUCT_NAME = "Xiaomi Redmi Note 8"
 WELL_KNOWN_PRODUCT_DESCRIPTION = "New Phone with some scratch in the screen."
 WELL_KNOWN_PRODUCT_TYPE = "Phone"
+WELL_KNOWN_PRODUCT_PRICE = 50
 
 NOT_KNOWN_PRODUCT_ID = bson.ObjectId()
 
@@ -13,7 +14,8 @@ def get_mock_product(add_id=False, add_attributes=False) -> Product:
     product = Product(
         name=WELL_KNOWN_PRODUCT_NAME,
         description=WELL_KNOWN_PRODUCT_DESCRIPTION,
-        type=WELL_KNOWN_PRODUCT_TYPE
+        type=WELL_KNOWN_PRODUCT_TYPE,
+        price=WELL_KNOWN_PRODUCT_PRICE
     )
 
     if add_id:
