@@ -1,0 +1,40 @@
+version: "3.9"
+   
+services:
+  db:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: secret
+    ports:
+      - 27017:27017
+
+  backend:
+    container_name: things-market-backend
+    image: things-market-backend
+    links:
+      - db
+    depends_on:
+      - db 
+    build:
+      context: ./backend
+      dockerfile: backend.dockerfile
+    command: bash ./runapp.sh
+    ports:
+      - "8000:8000"
+
+  frontend:
+    container_name: things-market-frontend
+    links:
+      - backend
+    depends_on:
+      - db 
+      - backend
+    image: things-market-frontend
+    build:
+      context: ./frontend
+      dockerfile: frontend.dockerfile
+    ports:
+      - "80:80"
+
