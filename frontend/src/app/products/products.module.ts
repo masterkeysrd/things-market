@@ -7,7 +7,8 @@ import { PRODUCTS } from './product.routes';
 import { ProductComponent } from './product.component';
 import { ProductCreateComponent } from './product-create.component';
 import { ProductDetailComponent } from './product-detail.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -15,8 +16,10 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [ProductComponent, ProductCreateComponent, ProductDetailComponent],
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
-    RouterModule.forChild(PRODUCTS)
+    RouterModule.forChild(PRODUCTS),
+    NgbPaginationModule
   ]
 })
 export class ProductsModule { }

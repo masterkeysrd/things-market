@@ -16,14 +16,21 @@ export const GET_PRODUCT = gql`
 `;
 
 export const GET_PRODUCTS_LIST = gql`
-  query GetProductsList {
-    products {
+query GetProductsList($page: Int, $pageSize: Int, $searchText: String) {
+  products(page: $page, pageSize: $pageSize, searchText: $searchText) {
+    page
+    pages
+    total
+    hasPrev
+    hasNext
+    objects {
       id
       name
       type
       description
     }
   }
+}
 `;
 
 
