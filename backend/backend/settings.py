@@ -25,7 +25,7 @@ SECRET_KEY = 'wa6+%jjnehxy-it9q@)m1#!*y92orq3g7-rf@l*34!r0c8)g*%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -81,6 +81,15 @@ DATABASES = {
         'ENGINE': 'djongo',
         'ENFORCE_SCHEMA': False,
         'NAME': 'things-market',
+        'HOST': 'db',
+        'CLIENT': {
+            'host': 'db',
+            'port': 27017,
+            'username': 'root',
+            'password': 'secret',
+            #'authSource': 'db-name',
+            'authMechanism': 'SCRAM-SHA-1'
+        }
     }
 }
 
