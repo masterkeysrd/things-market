@@ -2,12 +2,14 @@
   {
     "id": "5fdd40627eaea6f19a4ce6db",
     "name": "Test Product",
+    "price": 10,
     "type": "Test",
     "description": "Testing Description"
   },
   {
     "id": "5fdd4ad3b21691c93888eaa5",
     "name": "Testing name",
+    "price": 5.2,
     "type": "Test Type",
     "description": "Testing"
   }
