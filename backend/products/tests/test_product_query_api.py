@@ -31,44 +31,47 @@ class TestProductQueryApi(GraphQLTestCase):
     @patch('products.models.Product.objects.products')
     def test_product_query(self, mock_products: Mock):
         mock_products.return_value = mocker.get_mock_product_list(add_id=True)
-        response = self.query( 'query { products { id, name, type  } }')
+        response = self.query( 'query { products { objects { id, name, type } } }')
 
         content: dict = json.loads(response.content)
         data = content.get('data')
         products = data.get('products')
+        objects = products.get('objects')
 
         self.assertResponseNoErrors(response)
-        self.assertIsInstance(products, list)
-        self.assertNotEquals(0, len(products))
-        self.assertProductListFields(products)
+        self.assertIsInstance(objects, list)
+        self.assertNotEquals(0, len(objects))
+        self.assertProductListFields(objects)
 
     @patch('products.models.Product.objects.products')
     def test_product_query_with_attributes_list_empty(self, mock_products: Mock):
         mock_products.return_value = mocker.get_mock_product_list(add_id=True)
-        response = self.query( 'query { products { id, name, type, attributes { name, value } } }')
+        response = self.query( 'query { products { objects { id, name, type attributes { name, value } } } }')
 
         content: dict = json.loads(response.content)
         data = content.get('data')
         products = data.get('products')
+        objects = products.get('objects')
 
         self.assertResponseNoErrors(response)
-        self.assertIsInstance(products, list)
-        self.assertNotEquals(0, len(products))
-        self.assertProductListFields(products, check_attributes=True)
+        self.assertIsInstance(objects, list)
+        self.assertNotEquals(0, len(objects))
+        self.assertProductListFields(objects, check_attributes=True)
 
     @patch('products.models.Product.objects.products')
     def test_product_query_with_attributes_list_filled(self, mock_products: Mock):
         mock_products.return_value = mocker.get_mock_product_list(add_id=True, add_attributes=True)
-        response = self.query( 'query { products { id, name, type, attributes { name, value } } }')
+        response = self.query( 'query { products { objects { id, name, type, attributes { name, value } } } }')
 
         content: dict = json.loads(response.content)
         data = content.get('data')
         products = data.get('products')
+        objects = products.get('objects')
 
         self.assertResponseNoErrors(response)
-        self.assertIsInstance(products, list)
-        self.assertNotEquals(0, len(products))
-        self.assertProductListFields(products, check_attributes=True)
+        self.assertIsInstance(objects, list)
+        self.assertNotEquals(0, len(objects))
+        self.assertProductListFields(objects, check_attributes=True)
 
     @patch('products.models.Product.objects.get_by_id')
     def test_product_query_with_correct_id(self, mock_get_by_id: Mock):

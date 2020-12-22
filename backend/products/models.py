@@ -17,6 +17,7 @@ class Product(models.Model, object):
     _id = models.ObjectIdField()
     name = models.CharField(max_length=60)
     description = models.TextField()
+    price = models.FloatField()
     type = models.CharField(max_length=60)
     attributes = models.ArrayField(
         model_container=Attribute

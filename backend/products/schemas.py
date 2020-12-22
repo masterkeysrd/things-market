@@ -1,8 +1,18 @@
 import graphene
 from graphene_django.types import DjangoObjectType, ObjectType
 
+from products.utils import get_paginator
 from products.models import Attribute, Product
 from products.validators import validate_product
+
+
+class PaginatedType(graphene.ObjectType):
+    page = graphene.Int()
+    pages = graphene.Int()
+    total = graphene.Int()
+    has_next = graphene.Boolean()
+    has_prev = graphene.Boolean()
+
 
 class AttributeType(DjangoObjectType):
     class Meta:
@@ -22,10 +32,17 @@ class ProductType(DjangoObjectType):
         
         return list()
 
+class ProductPaginatedType(PaginatedType):
+    objects = graphene.List(ProductType)
 
 class Query(ObjectType):
     product = graphene.Field(ProductType, id=graphene.String())
-    products = graphene.List(ProductType, search_text=graphene.String(required=False))
+    products = graphene.Field(
+        ProductPaginatedType, 
+        page=graphene.Int(),
+        page_size=graphene.Int(),
+        search_text=graphene.String(required=False)
+    )
 
 
     def resolve_product(self, info, **kwargs):
@@ -37,12 +54,18 @@ class Query(ObjectType):
         return None
 
     def resolve_products(self, info, **kwargs):
+        page = kwargs.get('page', 1)
+        page_size = kwargs.get('page_size', 10)
         search_text = kwargs.get('search_text')
 
+        query = None
+        
         if search_text:
-            return Product.objects.search(search_text)
+            query = Product.objects.search(search_text)
+        else:
+            query = Product.objects.products()
 
-        return Product.objects.products()
+        return get_paginator(query, page_size, page, ProductPaginatedType)
 
 
 class AttributeInput(graphene.InputObjectType):
