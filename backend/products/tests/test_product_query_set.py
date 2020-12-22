@@ -1,9 +1,10 @@
-from unittest import mock
-from . import mocker
-from django.test import TestCase
 from unittest.mock import MagicMock, Mock, call, patch
-from products.models import Product
+
+from django.test import TestCase
+
 from products.manager import ProductQuerySet
+from products.models import Product
+from . import mocker
 
 
 class TestProductQuerySet(TestCase):
@@ -85,5 +86,3 @@ class TestProductQuerySet(TestCase):
 
         mock_get.side_effect = Product.DoesNotExist()
         self.assertRaises(Product.DoesNotExist, query_set.get_by_id, mocker.NOT_KNOWN_PRODUCT_ID)
-
-    

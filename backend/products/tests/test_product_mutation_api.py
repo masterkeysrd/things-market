@@ -3,7 +3,6 @@ from unittest.mock import Mock, patch
 from products.tests import mocker
 from graphene_django.utils.testing import GraphQLTestCase
 
-
 ADD_PRODUCT_MUTATION = '''
     mutation createProductMutation($name: String!, $type: String!, $price: Float!, $description: String!) {
         createProduct(input: {
@@ -24,6 +23,7 @@ ADD_PRODUCT_MUTATION = '''
         }
     }
 '''
+
 
 class TestProductMutationApi(GraphQLTestCase):
 
@@ -60,7 +60,6 @@ class TestProductMutationApi(GraphQLTestCase):
         self.assertEquals(mocker.WELL_KNOWN_PRODUCT_PRICE, product.get('price'))
         self.assertEquals(mocker.WELL_KNOWN_PRODUCT_DESCRIPTION, product.get('description'))
 
-
     @patch('products.manager.ProductManager.create')
     def test_create_product_mutation_with_none_values(self, mock_create: Mock):
         mock_create.return_value = mocker.get_mock_product(add_id=True)
@@ -76,7 +75,6 @@ class TestProductMutationApi(GraphQLTestCase):
             variables=variables
         )
         self.assertResponseHasErrors(response)
-
 
     @patch('products.manager.ProductManager.create')
     def test_create_product_mutation_with_empty_name(self, mock_create: Mock):
@@ -94,7 +92,6 @@ class TestProductMutationApi(GraphQLTestCase):
         )
         self.assertResponseHasErrors(response)
 
-
     @patch('products.manager.ProductManager.create')
     def test_create_product_mutation_with_empty_incomplete_name(self, mock_create: Mock):
         mock_create.return_value = mocker.get_mock_product(add_id=True)
@@ -110,7 +107,6 @@ class TestProductMutationApi(GraphQLTestCase):
             variables=variables
         )
         self.assertResponseHasErrors(response)
-
 
     @patch('products.manager.ProductManager.create')
     def test_create_product_mutation_with_empty_long_name(self, mock_create: Mock):
@@ -144,7 +140,6 @@ class TestProductMutationApi(GraphQLTestCase):
         )
         self.assertResponseHasErrors(response)
 
-
     @patch('products.manager.ProductManager.create')
     def test_create_product_mutation_with_empty_incomplete_type(self, mock_create: Mock):
         mock_create.return_value = mocker.get_mock_product(add_id=True)
@@ -161,10 +156,8 @@ class TestProductMutationApi(GraphQLTestCase):
         )
         self.assertResponseHasErrors(response)
 
-
     @patch('products.manager.ProductManager.create')
     def test_create_product_mutation_with_empty_long_type(self, mock_create: Mock):
-        
         mock_create.return_value = mocker.get_mock_product(add_id=True)
         variables = {
             'name': mocker.WELL_KNOWN_PRODUCT_NAME,

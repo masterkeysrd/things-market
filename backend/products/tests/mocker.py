@@ -10,6 +10,7 @@ WELL_KNOWN_PRODUCT_PRICE = 50
 
 NOT_KNOWN_PRODUCT_ID = bson.ObjectId()
 
+
 def get_mock_product(add_id=False, add_attributes=False) -> Product:
     product = Product(
         name=WELL_KNOWN_PRODUCT_NAME,
@@ -23,17 +24,18 @@ def get_mock_product(add_id=False, add_attributes=False) -> Product:
 
     if add_attributes:
         product.attributes = [
-        {
-               'name': 'Display',
-               'value': '7.1 inches',
-           },
-           {
-               'name': 'Camera',
-               'value': '64MP',
-           }
-    ]
+            {
+                'name': 'Display',
+                'value': '7.1 inches',
+            },
+            {
+                'name': 'Camera',
+                'value': '64MP',
+            }
+        ]
 
     return product
+
 
 def get_mock_product_list(quantity=10, add_id=False, add_attributes=False):
     product_list: List[Product] = list()
@@ -41,16 +43,16 @@ def get_mock_product_list(quantity=10, add_id=False, add_attributes=False):
 
     for i in range(1, quantity + 1):
         product = Product(
-                name=f'Product {i}',
-                description=f"Description of product {i}",
-                type=f"Product Type {i}")
-        
+            name=f'Product {i}',
+            description=f"Description of product {i}",
+            type=f"Product Type {i}")
+
         if add_id:
-            product.id=bson.ObjectId()
+            product.id = bson.ObjectId()
 
         if add_attributes:
-            product.attributes= [{'name': f'attribute_test {i}', 'value': f'attribute_value {i}'}]
-            
+            product.attributes = [{'name': f'attribute_test {i}', 'value': f'attribute_value {i}'}]
+
         product_list.append(product)
-        
+
     return product_list

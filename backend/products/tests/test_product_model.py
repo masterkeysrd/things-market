@@ -3,12 +3,13 @@ from django.test import TestCase
 from . import mocker
 from products.models import Product
 
+
 class TestProductModel(TestCase):
-    
+
     def test_create_product_with_no_attributes(self):
         product = mocker.get_mock_product()
         product.save()
-        
+
         filled_product = Product.objects.get_by_id(product.id)
 
         self.assertIsNotNone(product.pk, 'After create a Product it should have an ID')
@@ -17,7 +18,7 @@ class TestProductModel(TestCase):
         self.assertEquals(mocker.WELL_KNOWN_PRODUCT_NAME, filled_product.name)
         self.assertEquals(mocker.WELL_KNOWN_PRODUCT_DESCRIPTION, filled_product.description)
         self.assertEquals(mocker.WELL_KNOWN_PRODUCT_TYPE, filled_product.type)
-        
+
     def test_create_product_with_attributes(self):
         product = mocker.get_mock_product(add_attributes=True)
         product.save()
@@ -27,23 +28,21 @@ class TestProductModel(TestCase):
         self.assertIsNotNone(product.pk, 'After create a Product it should have an ID')
         self.assertEqual(2, len(filled_product.attributes), 'The length of attribute should be equals as inserted')
 
-
     def test_product_find_all_products(self):
         mock_produts = mocker.get_mock_product_list()
         for p in mock_produts:
             p.save()
-        
+
         products_list = Product.objects.all()
         product = products_list.get(name=mocker.WELL_KNOWN_PRODUCT_NAME)
-        
+
         self.assertEquals(len(mock_produts), products_list.count())
         self.assertIsNotNone(product)
-
 
     def test_save_empty_product(self):
         product = Product()
         product.save()
-        
+
         filled_product = Product.objects.get_by_id(product.id)
         print(filled_product.name)
 

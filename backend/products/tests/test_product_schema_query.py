@@ -1,9 +1,11 @@
-from unittest import mock
-from django.test import TestCase
 from unittest.mock import Mock, patch
-from products.tests import mocker
-from products.schemas import Query
+
+from django.test import TestCase
+
 from products.models import Product
+from products.schemas import Query
+from products.tests import mocker
+
 
 class TestProductQuery(TestCase):
 
@@ -37,5 +39,3 @@ class TestProductQuery(TestCase):
 
         query = Query()
         self.assertRaises(Product.DoesNotExist, query.resolve_product, None, id=mocker.NOT_KNOWN_PRODUCT_ID)
-
-

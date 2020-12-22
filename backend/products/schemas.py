@@ -18,34 +18,37 @@ class AttributeType(DjangoObjectType):
     class Meta:
         model = Attribute
 
+
 class ProductType(DjangoObjectType):
     id = graphene.String()
     attributes = graphene.List(AttributeType)
+
     class Meta:
         model = Product
-        exclude = ('_id', )
+        exclude = ('_id',)
 
-
-    def resolve_attributes(self, info):
+    def resolve_attributes(self, _):
         if self.attributes:
-            return [AttributeType(name=attribute.get('name'), value=attribute.get('value')) for attribute in self.attributes]
-        
+            return [AttributeType(name=attribute.get('name'), value=attribute.get('value')) for attribute in
+                    self.attributes]
+
         return list()
+
 
 class ProductPaginatedType(PaginatedType):
     objects = graphene.List(ProductType)
 
+
 class Query(ObjectType):
     product = graphene.Field(ProductType, id=graphene.String())
     products = graphene.Field(
-        ProductPaginatedType, 
+        ProductPaginatedType,
         page=graphene.Int(),
         page_size=graphene.Int(),
         search_text=graphene.String(required=False)
     )
 
-
-    def resolve_product(self, info, **kwargs):
+    def resolve_product(self, _, **kwargs):
         id = kwargs.get('id')
 
         if id:
@@ -53,13 +56,11 @@ class Query(ObjectType):
 
         return None
 
-    def resolve_products(self, info, **kwargs):
+    def resolve_products(self, _, **kwargs):
         page = kwargs.get('page', 1)
         page_size = kwargs.get('page_size', 10)
         search_text = kwargs.get('search_text')
 
-        query = None
-        
         if search_text:
             query = Product.objects.search(search_text)
         else:
@@ -77,7 +78,7 @@ class ProductInput(graphene.InputObjectType):
     id = graphene.String()
     name = graphene.String(required=True)
     type = graphene.String(required=True)
-    price= graphene.Float(required=True)
+    price = graphene.Float(required=True)
     description = graphene.String(required=True)
     attributes = graphene.List(AttributeInput)
 
@@ -133,6 +134,7 @@ class UpdateProduct(graphene.Mutation):
         product.save()
 
         return UpdateProduct(ok=True, product=product)
+
 
 class DeleteProduct(graphene.Mutation):
     class Arguments:

@@ -1,11 +1,12 @@
 from bson.objectid import ObjectId
 from djongo.models import Manager, QuerySet
 
+
 class ProductQuerySet(QuerySet):
 
     def all(self):
         return super().all()
-        
+
     def products(self):
         return self.all()
 
@@ -21,13 +22,13 @@ class ProductQuerySet(QuerySet):
 
     def search(self, text_search):
         return self.get_by_name(text_search) | \
-            self.get_by_description(text_search)
+               self.get_by_description(text_search)
 
 
 class ProductManager(Manager):
     def get_queryset(self) -> ProductQuerySet:
         return ProductQuerySet(self.model, using=self._db)
-    
+
     def get_by_id(self, id):
         return self.get_queryset().get_by_id(id)
 

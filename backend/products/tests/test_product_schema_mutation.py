@@ -5,8 +5,9 @@ from products.tests import mocker
 from products.models import Product
 from products.schemas import CreateProduct
 
+
 class TestProductQuery(TestCase):
-    
+
     @patch('products.manager.ProductManager.create')
     def test_create_product_mutation(self, mock_create: Mock):
         mock_create.return_value = mocker.get_mock_product(add_id=True)
