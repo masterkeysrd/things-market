@@ -20,6 +20,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=60)),
                 ('description', models.TextField()),
                 ('type', models.CharField(max_length=60)),
+                ('price', models.DecimalField()),
                 ('attributes', djongo.models.fields.ArrayField(model_container=products.models.Attribute)),
             ],
         ),
