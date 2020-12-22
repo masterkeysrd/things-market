@@ -1,0 +1,237 @@
+[
+  {
+    "model": "products.product",
+    "pk": "5fdbfe80b747cd99d130d14f",
+    "fields": {
+      "name": "Xiaomi Redmi Note 8",
+      "description": "New Phone with some scratch in the screen.",
+      "type": "Phone",
+      "price": "180.00",
+      "attributes": []
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": "5fdbfe8c63e55ad24a600118",
+    "fields": {
+      "name": "Xiaomi Redmi Note 9 Pro",
+      "description": "New Phone with some scratch in the screen.",
+      "type": "Phone",
+      "price": "180.00",
+      "attributes": [
+        {
+          "name": "Display",
+          "value": "5.8\" FHD+ (1080 x 2340) OLED - 60 Hz refresh rate"
+        },
+        {
+          "name": "Processing power",
+          "value": "Qualcomm[R] Snapdragon[TM] 730G 2.2 GHz + 1.8 GHz, 64-bit"
+        },
+        {
+          "name": "Memory and storage",
+          "value": "6 GB LPDDR4x - 128 GB storage"
+        },
+        {
+          "name": "Camera",
+          "value": "Rear: 12 MP - Front: 8 MP"
+        },
+        {
+          "name": "Charging",
+          "value": "Fast charging"
+        }
+      ]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": "5fe12d2ee3f7862565a36c62",
+    "fields": {
+      "name": "Google Pixel 4a - New Unlocked Android Smartphone - 128 GB",
+      "description": "Google Pixel 4a - New Unlocked Android Smartphone - 128 GB of Storage - Up to 24 Hour Battery - Just Black.",
+      "type": "Phone",
+      "price": "349.00",
+      "attributes": [
+        {
+          "name": "Display",
+          "value": "5.8\" FHD+ (1080 x 2340) OLED - 60 Hz refresh rate"
+        },
+        {
+          "name": "Processing power",
+          "value": "Qualcomm[R] Snapdragon[TM] 730G 2.2 GHz + 1.8 GHz, 64-bit"
+        },
+        {
+          "name": "Memory and storage",
+          "value": "6 GB LPDDR4x - 128 GB storage"
+        },
+        {
+          "name": "Camera",
+          "value": "Rear: 12 MP - Front: 8 MP"
+        },
+        {
+          "name": "Charging",
+          "value": "Fast charging"
+        }
+      ]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": "5fe12b82606e7ce36a1a74fb",
+    "fields": {
+      "name": "Moto G Power | 3-Day Battery1 | Unlocked",
+      "description": "Moto G Power | 3-Day Battery1 | Unlocked | Made for US by Motorola | 4/64GB | 16MP Camera | 2020 | Black",
+      "type": "Phone",
+      "price": "180.00",
+      "attributes": [
+        {
+          "name": "Display",
+          "value": "6.7\" OLED, FHD+ (2340×1080),19.5:9 "
+        },
+        {
+          "name": "Processing power",
+          "value": "Qualcomm Snapdragon 765 with 2.4GHz octa-core"
+        },
+        {
+          "name": "Memory and storage",
+          "value": "6GB + 256GB "
+        },
+        {
+          "name": "Camera",
+          "value": "64MP sensor, 16MP ultra-wide angle with Macro Vision"
+        },
+        {
+          "name": "Charging",
+          "value": "Fast charging"
+        }
+      ]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": "5fe12b82606e7ce36a1a74fb",
+    "fields": {
+      "name": "Samsung Galaxy A01 4G LTE Prepaid Smartphone",
+      "description": "Total Wireless Samsung Galaxy A01 4G LTE Prepaid Smartphone - Black - 16GB - Sim Card Included -CDMA",
+      "type": "Phone",
+      "price": "200.00",
+      "attributes": [
+        {
+          "name": "Display",
+          "value": "6.7\" OLED, FHD+ (2340×1080),19.5:9 "
+        },
+        {
+          "name": "Processing power",
+          "value": "Qualcomm Snapdragon 765 with 2.4GHz octa-core"
+        },
+        {
+          "name": "Memory and storage",
+          "value": "6GB + 256GB "
+        },
+        {
+          "name": "Camera",
+          "value": "64MP sensor, 16MP ultra-wide angle with Macro Vision"
+        },
+        {
+          "name": "Charging",
+          "value": "Fast charging"
+        }
+      ]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": "5fe12bd32ddbcde1cfcb779d",
+    "fields": {
+      "name": "Galaxy A01 4G LTE Prepaid Smartphone - Black",
+      "description": "TracFone Samsung Galaxy A01 4G LTE Prepaid Smartphone - Black - 16GB - Sim Card Included -CDMA ",
+      "type": "Phone",
+      "price": "180.00",
+      "attributes": [
+        {
+          "name": "Display",
+          "value": "6.7\" OLED, FHD+ (2340×1080),19.5:9 "
+        },
+        {
+          "name": "Processing power",
+          "value": "Qualcomm Snapdragon 765 with 2.4GHz octa-core"
+        },
+        {
+          "name": "Memory and storage",
+          "value": "6GB + 256GB "
+        },
+        {
+          "name": "Camera",
+          "value": "64MP sensor, 16MP ultra-wide angle with Macro Vision"
+        },
+        {
+          "name": "Charging",
+          "value": "Fast charging"
+        }
+      ]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": "5fe12ca30a28fbdb9ff8aa03",
+    "fields": {
+      "name": "Halter Computer Desk 47” Modern Style Table",
+      "description": "TracFone Samsung Galaxy A01 4G LTE Prepaid Smartphone - Black - 16GB - Sim Card Included -CDMA ",
+      "type": "Office Desk",
+      "price": "60.00",
+      "attributes": [
+        {
+          "name": "Color",
+          "value": " Cherry-black"
+        },
+        {
+          "name": "Material",
+          "value": "Engineered Wood, Metal"
+        },
+        {
+          "name": " Furniture Finish",
+          "value": "Cherry"
+        },
+        {
+          "name": "Shape",
+          "value": "Rectangle"
+        },
+        {
+          "name": "Number of Shelves",
+          "value": "1"
+        }
+      ]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": "5fe12cb384c9b9387e0d05b8",
+    "fields": {
+      "name": "Writing Computer Desk 39\" Office Folding Study Desks",
+      "description": "Writing Computer Desk 39\" Office Folding Study Desks, Working Desktop for Home, Corner Laptop Gaming Table Metal Frame by Halter (Cherry)",
+      "type": "Office Desk",
+      "price": "50.00",
+      "attributes": [
+        {
+          "name": "Color",
+          "value": "Cherry and Black"
+        },
+        {
+          "name": "Material",
+          "value": "Engineered Wood, Metal"
+        },
+        {
+          "name": " Furniture Finish",
+          "value": "MDF and Metal"
+        },
+        {
+          "name": "Shape",
+          "value": "Rectangle"
+        },
+        {
+          "name": "Brand",
+          "value": "Halter"
+        }
+      ]
+    }
+  }
+]
