@@ -1,4 +1,5 @@
 Django
+django-filter>=2
 djongo
 graphene-django
 coverage
