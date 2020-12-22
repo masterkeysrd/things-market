@@ -1,7 +1,7 @@
 import { Observable, of } from 'rxjs';
 import products from '../../mock/products.mock.json';
-import { IProduct } from "src/app/models/product.model";
-import { IPaginate } from 'src/app/models/paginate.model';
+import { IProduct } from '../../app/shared/models/product.model';
+import { IPaginate } from '../../app/shared/models/paginate.model';
 
 export class ProductServiceMock {
 

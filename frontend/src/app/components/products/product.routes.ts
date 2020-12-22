@@ -1,12 +1,12 @@
-import { Injectable } from "@angular/core";
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, Routes } from "@angular/router";
-import { Observable, of } from "rxjs";
-import { take } from "rxjs/operators";
-import { IProduct } from "../models/product.model";
-import { ProductsService } from "../service/products.service";
-import { ProductCreateComponent } from "./product-create.component";
-import { ProductDetailComponent } from "./product-detail.component";
-import { ProductComponent } from "./product.component";
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, Routes } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { IProduct } from '../../shared/models/product.model';
+import { ProductsService } from '../../shared/service/products.service';
+import { ProductCreateComponent } from './product-create.component';
+import { ProductDetailComponent } from './product-detail.component';
+import { ProductComponent } from './product.component';
 
 
 @Injectable({ providedIn: 'root' })
@@ -23,9 +23,9 @@ export class ProductResolve implements Resolve<IProduct> {
         );
     }
 
-    return of({})
+    return of({});
   }
-};
+}
 
 export const PRODUCTS: Routes = [
   {

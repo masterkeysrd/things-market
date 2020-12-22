@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { IProduct } from '../models/product.model';
-import { ProductsService } from '../service/products.service';
-import { ToastService } from '../service/toast.service';
-import { ConfirmDialogService } from '../service/confirm-dialog.service';
-import { IPaginate } from '../models/paginate.model';
+import { IProduct } from 'src/app/shared/models/product.model';
+import { ProductsService } from 'src/app/shared/service/products.service';
+import { ToastService } from 'src/app/shared/service/toast.service';
+import { ConfirmDialogService } from 'src/app/shared/service/confirm-dialog.service';
+import { IPaginate } from 'src/app/shared/models/paginate.model';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -13,13 +13,13 @@ import { Subscription } from 'rxjs';
 export class ProductComponent implements OnInit, OnDestroy {
 
   title = 'Products';
-  searchText: "";
+  searchText: '';
   searchInfo = {
-    searchText: "",
+    searchText: '',
     page: 1,
     pageSize: 10,
     total: 1
-  }
+  };
 
   subscription: Subscription;
   products: IPaginate<IProduct>;
@@ -38,11 +38,11 @@ export class ProductComponent implements OnInit, OnDestroy {
     this.getProducts();
   }
 
-  onSearch() {
+  onSearch(): void {
     this.searchInfo = {
       ...this.searchInfo,
       searchText: this.searchText
-    }
+    };
     this.getProducts();
   }
 
@@ -62,17 +62,16 @@ export class ProductComponent implements OnInit, OnDestroy {
 
   refreshProducts(): void {
     this.getProducts();
-    console.log('here!!!');
   }
 
-  deleteProduct(product: IProduct) {
-    this.confirmDialog.confirm('Confirm Delete', `Are you sure you want to delete ${product.name}?`)
+  deleteProduct({id, name}: IProduct): void {
+    this.confirmDialog.confirm('Confirm Delete', `Are you sure you want to delete ${name}?`)
       .then((confirmed) => {
         if (confirmed) {
-          this.productsService.deleteProduct(product.id)
+          this.productsService.deleteProduct(id)
             .subscribe(product => this.onDelete(product));
         }
-      })
+      });
   }
 
   onDelete(product: IProduct): void {
@@ -85,7 +84,7 @@ export class ProductComponent implements OnInit, OnDestroy {
     console.error(error);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 }

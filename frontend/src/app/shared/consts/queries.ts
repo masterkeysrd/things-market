@@ -54,7 +54,7 @@ export const CREATE_PRODUCT = gql`
       }
     }
   }
-`
+`;
 
 
 export const UPDATE_PRODUCT = gql`
@@ -76,7 +76,7 @@ export const UPDATE_PRODUCT = gql`
       }
     }
   }
-`
+`;
 
 export const DELETE_PRODUCT = gql`
   mutation deleteProductMutation($id: String!) {

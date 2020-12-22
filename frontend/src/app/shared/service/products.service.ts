@@ -4,7 +4,7 @@ import { Apollo } from 'apollo-angular';
 import { Injectable } from '@angular/core';
 
 import { IProduct } from '../models/product.model';
-import { CREATE_PRODUCT, DELETE_PRODUCT, GET_PRODUCT, GET_PRODUCTS_LIST, UPDATE_PRODUCT } from './product.queries';
+import { CREATE_PRODUCT, DELETE_PRODUCT, GET_PRODUCT, GET_PRODUCTS_LIST, UPDATE_PRODUCT } from '../consts/queries';
 import { IPaginate } from '../models/paginate.model';
 
 @Injectable({
@@ -26,7 +26,7 @@ export class ProductsService {
       );
   }
 
-  getProductList(searchText: String = "", page: Number = 1, pageSize: Number = 10): Observable<IPaginate<IProduct>> {
+  getProductList(searchText: string = '', page: number = 1, pageSize: number = 10): Observable<IPaginate<IProduct>> {
     this.lastQueryInfo = { searchText, page, pageSize };
     return this.apollo.watchQuery<any>({
       query: GET_PRODUCTS_LIST,

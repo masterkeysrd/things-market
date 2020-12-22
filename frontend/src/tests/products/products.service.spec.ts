@@ -7,11 +7,11 @@ import {
 import mockProduct from '../../mock/product.mock.json';
 import mockProducts from '../../mock/products.mock.json';
 
-import { IProduct } from 'src/app/models/product.model';
-import { GET_PRODUCT, GET_PRODUCTS_LIST } from 'src/app/service/product.queries';
+import { IProduct } from '../../app/shared/models/product.model';
+import { GET_PRODUCT, GET_PRODUCTS_LIST } from '../../app/shared/consts/queries';
 
-import { ProductsService } from '../../app/service/products.service';
-import { IPaginate } from 'src/app/models/paginate.model';
+import { ProductsService } from '../../app/shared/service/products.service';
+import { IPaginate } from '../../app/shared/models/paginate.model';
 
 describe('ProductsService', () => {
   let service: ProductsService;
@@ -30,7 +30,7 @@ describe('ProductsService', () => {
   });
 
   it('should get product with correct id', () => {
-    const expected = <IProduct>mockProduct;
+    const expected = mockProduct as IProduct;
     service.getProduct(expected.id)
       .subscribe((actual) => {
         expect(expected).toEqual(actual);
@@ -65,7 +65,7 @@ describe('ProductsService', () => {
   });
 
   it('should get product with empty id', () => {
-    service.getProduct("")
+    service.getProduct('')
       .subscribe(product => {
         expect(product).toBeFalsy();
       });
@@ -89,12 +89,12 @@ describe('ProductsService', () => {
     const op = controller.expectOne(GET_PRODUCTS_LIST);
 
     op.flush({
-       data: {
-          products: {
-            objects: mockProducts
-          }
+      data: {
+        products: {
+          objects: mockProducts
         }
-      });
+      }
+    });
 
     expect(op.operation.operationName).toEqual('GetProductsList');
   });

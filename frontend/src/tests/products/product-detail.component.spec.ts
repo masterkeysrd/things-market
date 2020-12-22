@@ -1,9 +1,9 @@
 import { of } from 'rxjs';
 import mockProduct from '../../mock/product.mock.json';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ProductDetailComponent } from '../../app/products/product-detail.component';
+import { ProductDetailComponent } from '../../app/components/products/product-detail.component';
 import { ActivatedRoute } from '@angular/router';
-import { ProductComponent } from '../../app/products/product.component';
+import { ProductComponent } from '../../app/components/products/product.component';
 
 describe('ProductViewComponent', () => {
   let component: ProductDetailComponent;

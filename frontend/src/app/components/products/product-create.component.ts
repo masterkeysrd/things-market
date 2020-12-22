@@ -3,11 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { ProductsService } from '../service/products.service';
-import { IProduct, IProductAttribute } from '../models/product.model';
+import { ProductsService } from '../../shared/service/products.service';
+import { IProduct, IProductAttribute } from '../../shared/models/product.model';
 
-import { ToastService } from '../service/toast.service';
-import { ConfirmDialogService } from '../service/confirm-dialog.service';
+import { ToastService } from '../../shared/service/toast.service';
+import { ConfirmDialogService } from '../../shared/service/confirm-dialog.service';
 
 @Component({
   selector: 'app-create',
@@ -48,7 +48,9 @@ export class ProductCreateComponent implements OnInit {
 
   loadProduct(): void {
     this.route.data.subscribe(({ product }) => {
-      product && this.updateForm(product);
+      if (product) {
+        this.updateForm(product);
+      }
     });
   }
 
@@ -70,11 +72,11 @@ export class ProductCreateComponent implements OnInit {
     }
   }
 
-  createAttributeForm() {
+  createAttributeForm(): FormGroup {
     return this.fb.group({
       name: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
       value: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(60)]]
-    })
+    });
   }
 
   updateForm(product: IProduct): void {
@@ -93,7 +95,7 @@ export class ProductCreateComponent implements OnInit {
           name: attribute.name,
           value: attribute.value
         });
-        this.attributes.push(form)
+        this.attributes.push(form);
       });
     }
 
@@ -130,15 +132,15 @@ export class ProductCreateComponent implements OnInit {
       price: this.productForm.get('price').value,
       description: this.productForm.get('description').value,
       attributes: this.createAttributesFromForm()
-    }
+    };
   }
 
   private createAttributesFromForm(): IProductAttribute[] {
-    return (<FormArray>this.productForm.get('attributes')).controls.map((form: FormGroup) => {
+    return this.attributes.controls.map((form: FormGroup) => {
       return {
         name: form.get('name').value,
         value: form.get('value').value
-      }
+      };
     });
   }
 
@@ -152,9 +154,9 @@ export class ProductCreateComponent implements OnInit {
     this.previousState();
   }
 
-  protected onSaveError(errors): void {
+  protected onSaveError(errors: any): void {
     this.isSaving = false;
-    this.toast.showDanger('Error saving product.')
+    this.toast.showDanger('Error saving product.');  
     console.error(errors);
   }
 }

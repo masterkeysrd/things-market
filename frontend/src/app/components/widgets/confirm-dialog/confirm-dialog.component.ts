@@ -14,15 +14,15 @@ export class ConfirmDialogComponent {
 
   constructor(private activeModal: NgbActiveModal) { }
 
-  public decline() {
+  public decline(): void {
     this.activeModal.close(false);
   }
 
-  public accept() {
+  public accept(): void {
     this.activeModal.close(true);
   }
 
-  public dismiss() {
+  public dismiss(): void {
     this.activeModal.dismiss();
   }
 

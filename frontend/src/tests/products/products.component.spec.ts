@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ProductsService } from 'src/app/service/products.service';
+import { ProductsService } from 'src/app/shared/service/products.service';
 
 import products from '../../mock/products.mock.json';
-import { ProductComponent } from '../../app/products/product.component';
+import { ProductComponent } from '../../app/components/products/product.component';
 import { ProductServiceMock } from '../mock/product.service.mock';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
-import { ToastService } from 'src/app/service/toast.service';
-import { ConfirmDialogService } from 'src/app/service/confirm-dialog.service';
+import { ToastService } from 'src/app/shared/service/toast.service';
+import { ConfirmDialogService } from 'src/app/shared/service/confirm-dialog.service';
 
 describe('ProductsComponent', () => {
   let component: ProductComponent;
@@ -33,7 +33,7 @@ describe('ProductsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ProductComponent);
     component = fixture.componentInstance;
-    productService = TestBed.inject(ProductsService)
+    productService = TestBed.inject(ProductsService);
     h1 = fixture.nativeElement.querySelector('h3');
     fixture.detectChanges();
   });
@@ -59,7 +59,7 @@ describe('ProductsComponent', () => {
   });
 
   it('should display different title', () => {
-    const title = "Test Title";
+    const title = 'Test Title';
     component.title = title;
     fixture.detectChanges();
 
