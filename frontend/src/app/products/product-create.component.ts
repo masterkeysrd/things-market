@@ -47,7 +47,7 @@ export class ProductCreateComponent implements OnInit {
 
   loadProduct(): void {
     this.route.data.subscribe(({ product }) => {
-      this.updateForm(product);
+      product && this.updateForm(product);
     });
   }
 
@@ -78,13 +78,13 @@ export class ProductCreateComponent implements OnInit {
 
   updateForm(product: IProduct): void {
     this.productForm.patchValue({
-      id: product.id,
-      name: product.name,
-      type: product.type,
-      description: product.description,
+      id: product?.id,
+      name: product?.name,
+      type: product?.type,
+      description: product?.description,
     });
 
-    if (product.attributes) {
+    if (product?.attributes) {
       product.attributes.forEach(attribute => {
         const form = this.createAttributeForm();
         form.patchValue({

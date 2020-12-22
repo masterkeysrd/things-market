@@ -11,6 +11,7 @@ import { IProduct } from 'src/app/models/product.model';
 import { GET_PRODUCT, GET_PRODUCTS_LIST } from 'src/app/service/product.queries';
 
 import { ProductsService } from '../../app/service/products.service';
+import { IPaginate } from 'src/app/models/paginate.model';
 
 describe('ProductsService', () => {
   let service: ProductsService;
@@ -81,7 +82,7 @@ describe('ProductsService', () => {
   });
 
   it('should get products list', () => {
-    service.getProductList().subscribe((products: IProduct[]) => {
+    service.getProductList().subscribe((products: IPaginate<IProduct>) => {
       expect(products).toBeTruthy();
     });
 
@@ -89,7 +90,9 @@ describe('ProductsService', () => {
 
     op.flush({
        data: {
-          products: mockProducts
+          products: {
+            objects: mockProducts
+          }
         }
       });
 

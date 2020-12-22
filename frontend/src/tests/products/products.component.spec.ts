@@ -4,6 +4,9 @@ import { ProductsService } from 'src/app/service/products.service';
 import products from '../../mock/products.mock.json';
 import { ProductComponent } from '../../app/products/product.component';
 import { ProductServiceMock } from '../mock/product.service.mock';
+import { NgbPagination, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastService } from 'src/app/service/toast.service';
+import { ConfirmDialogService } from 'src/app/service/confirm-dialog.service';
 
 describe('ProductsComponent', () => {
   let component: ProductComponent;
@@ -15,7 +18,12 @@ describe('ProductsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ProductComponent ],
+      imports: [
+        NgbPaginationModule,
+      ],
       providers: [
+        ToastService,
+        ConfirmDialogService,
         { provide: ProductsService, useClass: ProductServiceMock }
       ]
     })
@@ -26,7 +34,7 @@ describe('ProductsComponent', () => {
     fixture = TestBed.createComponent(ProductComponent);
     component = fixture.componentInstance;
     productService = TestBed.inject(ProductsService)
-    h1 = fixture.nativeElement.querySelector('h1');
+    h1 = fixture.nativeElement.querySelector('h3');
     fixture.detectChanges();
   });
 
@@ -69,6 +77,7 @@ describe('ProductsComponent', () => {
     component.ngOnInit();
     fixture.detectChanges();
     fixture.whenStable().then(() => {
+      fixture.detectChanges();
       const rows: HTMLTableRowElement[] = fixture.nativeElement.querySelectorAll('tbody tr');
 
       products.forEach((product, i) => {
