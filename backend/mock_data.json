@@ -233,5 +233,165 @@
         }
       ]
     }
+  },
+  {
+    "model": "products.product",
+    "pk": "5fe1995acfc8072af7bd8d55",
+    "fields": {
+      "name": "Writing Computer Desk 72\" Office Folding Study Desks",
+      "description": "Writing Computer Desk 72\" Office Folding Study Desks, Working Desktop for Home, Corner Laptop Gaming Table Metal Frame by Halter (Cherry)",
+      "type": "Office Desk",
+      "price": "70.00",
+      "attributes": [
+        {
+          "name": "Color",
+          "value": "Cherry and Black"
+        },
+        {
+          "name": "Material",
+          "value": "Engineered Wood, Metal"
+        },
+        {
+          "name": " Furniture Finish",
+          "value": "MDF and Metal"
+        },
+        {
+          "name": "Shape",
+          "value": "Rectangle"
+        },
+        {
+          "name": "Brand",
+          "value": "Halter"
+        }
+      ]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": "5fe199521055ab2a8dd25e90",
+    "fields": {
+      "name": "Writing Computer Desk 80\" Office Folding Study Desks",
+      "description": "Writing Computer Desk 80\" Office Folding Study Desks, Working Desktop for Home, Corner Laptop Gaming Table Metal Frame by Halter (Cherry)",
+      "type": "Office Desk",
+      "price": "100.00",
+      "attributes": [
+        {
+          "name": "Color",
+          "value": "Cherry and Black"
+        },
+        {
+          "name": "Material",
+          "value": "Engineered Wood, Metal"
+        },
+        {
+          "name": " Furniture Finish",
+          "value": "MDF and Metal"
+        },
+        {
+          "name": "Shape",
+          "value": "Rectangle"
+        },
+        {
+          "name": "Brand",
+          "value": "Halter"
+        }
+      ]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": "5fe1994c6b70a385f2205747",
+    "fields": {
+      "name": "Galaxy A02 4G LTE Prepaid Smartphone - Black",
+      "description": "TracFone Samsung Galaxy A01 4G LTE Prepaid Smartphone - Black - 16GB - Sim Card Included -CDMA ",
+      "type": "Phone",
+      "price": "200.00",
+      "attributes": [
+        {
+          "name": "Display",
+          "value": "6.7\" OLED, FHD+ (2340×1080),19.5:9 "
+        },
+        {
+          "name": "Processing power",
+          "value": "Qualcomm Snapdragon 765 with 2.4GHz octa-core"
+        },
+        {
+          "name": "Memory and storage",
+          "value": "6GB + 256GB "
+        },
+        {
+          "name": "Camera",
+          "value": "64MP sensor, 18MP ultra-wide angle with Macro Vision"
+        },
+        {
+          "name": "Charging",
+          "value": "Fast charging"
+        }
+      ]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": "5fe19946920f4623c8b6a5c0",
+    "fields": {
+      "name": "Galaxy A02 4G LTE Prepaid Smartphone - Black",
+      "description": "TracFone Samsung Galaxy A01 4G LTE Prepaid Smartphone - Black - 16GB - Sim Card Included -CDMA ",
+      "type": "Phone",
+      "price": "200.00",
+      "attributes": [
+        {
+          "name": "Display",
+          "value": "6.7\" OLED, FHD+ (2340×1080),19.5:9 "
+        },
+        {
+          "name": "Processing power",
+          "value": "Qualcomm Snapdragon 765 with 2.4GHz octa-core"
+        },
+        {
+          "name": "Memory and storage",
+          "value": "6GB + 256GB "
+        },
+        {
+          "name": "Camera",
+          "value": "64MP sensor, 18MP ultra-wide angle with Macro Vision"
+        },
+        {
+          "name": "Charging",
+          "value": "Fast charging"
+        }
+      ]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": "5fe1993f207cbf1cfb55188e",
+    "fields": {
+      "name": "Galaxy A05 4G LTE Prepaid Smartphone - Black",
+      "description": "TracFone Samsung Galaxy A01 4G LTE Prepaid Smartphone - Black - 16GB - Sim Card Included -CDMA ",
+      "type": "Phone",
+      "price": "200.00",
+      "attributes": [
+        {
+          "name": "Display",
+          "value": "6.7\" OLED, FHD+ (2340×1080),19.5:9 "
+        },
+        {
+          "name": "Processing power",
+          "value": "Qualcomm Snapdragon 765 with 2.4GHz octa-core"
+        },
+        {
+          "name": "Memory and storage",
+          "value": "6GB + 256GB "
+        },
+        {
+          "name": "Camera",
+          "value": "64MP sensor, 18MP ultra-wide angle with Macro Vision"
+        },
+        {
+          "name": "Charging",
+          "value": "Fast charging"
+        }
+      ]
+    }
   }
 ]
